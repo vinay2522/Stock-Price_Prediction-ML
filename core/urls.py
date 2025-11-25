@@ -16,12 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from app.views import *
+from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
-    path('search/', search),
-    path('predict/<str:ticker_value>/<str:number_of_days>/', predict),
-    path('ticker/', ticker),
+    path('', views.index),
+    path('search/', views.search),
+    path('predict/<str:ticker_value>/<str:number_of_days>/', views.predict),
+    path('ticker/', views.ticker),
+    path('register/', views.register_view, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
 ]

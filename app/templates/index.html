@@ -6,6 +6,9 @@
     <meta charset="utf-8" />
     <title>Stock Market Prediction</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
@@ -28,21 +31,17 @@
     />
 
     <!-- Libraries Stylesheet -->
-    <link
-      href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}"
-      rel="stylesheet"
-    />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
 
     <!-- Template Stylesheet -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}?v=3.0" rel="stylesheet" />
+    <link href="{% static 'css/accessibility.css' %}?v=3.0" rel="stylesheet" />
+    <script src="{% static 'js/main.js' %}?v=2.5"></script>
     
+    <!-- Plotly.js MUST be loaded before chart divs -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
   </head>
 
   <body>
@@ -101,11 +100,15 @@
             </div>
             <div class="ms-3">
               <h6 class="mb-0">Welcome</h6>
+              {% if user.is_authenticated %}
+              <span>{{ user.username }}</span>
+              {% else %}
               <span>Guest</span>
+              {% endif %}
             </div>
           </div>
           <div class="navbar-nav w-100">
-            <a href="#" class="nav-item nav-link active"
+            <a href="/" class="nav-item nav-link active"
               ><i class="fa fa-home me-2"></i>Home</a
             >
             <a href="/search" class="nav-item nav-link"
@@ -114,6 +117,18 @@
             <a href="/ticker" class="nav-item nav-link"
               ><i class="fa fa-list-alt me-2"></i>Ticker Info</a
             >
+            {% if user.is_authenticated %}
+            <a href="/logout/" class="nav-item nav-link"
+              ><i class="fa fa-sign-out-alt me-2"></i>Logout</a
+            >
+            {% else %}
+            <a href="/login/" class="nav-item nav-link"
+              ><i class="fa fa-sign-in-alt me-2"></i>Login</a
+            >
+            <a href="/register/" class="nav-item nav-link"
+              ><i class="fa fa-user-plus me-2"></i>Register</a
+            >
+            {% endif %}
           </div>
         </nav>
       </div>
@@ -151,24 +166,59 @@
                   alt=""
                   style="width: 40px; height: 40px"
                 />
+                {% if user.is_authenticated %}
+                <span class="d-none d-lg-inline-flex">{{ user.username }}</span>
+                {% else %}
                 <span class="d-none d-lg-inline-flex">Guest</span>
+                {% endif %}
               </a>
               <div
                 class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"
               >
                 <a href="/search" class="dropdown-item">Predict</a>
                 <a href="/ticker" class="dropdown-item">Ticker Info</a>
+                {% if user.is_authenticated %}
+                <a href="/logout/" class="dropdown-item">Logout</a>
+                {% else %}
+                <a href="/login/" class="dropdown-item">Login</a>
+                <a href="/register/" class="dropdown-item">Register</a>
+                {% endif %}
               </div>
             </div>
           </div>
         </nav>
         <!-- Navbar End -->
 
+        <!-- Messages -->
+        {% if messages %}
+        <div class="container-fluid pt-4 px-4">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- Messages End -->
+
         <!--Runing name logo-->
         <div class="container-fluid pt-4 px-3">
-          <div class="bg-success rounded-top p-4">
-            <h2 style="animation: running-text 10s linear infinite; color: green; text-shadow: 2px 2px 4px #000;">
-              <span id="running-text">Welcome to Stock Price Prediction with Machine Learning.</span>
+          <div class="rounded-top p-4" style="background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%) !important;">
+            <h2 style="animation: running-text 12s linear infinite; margin: 0; padding: 10px 0;">
+              <span id="running-text" style="
+                color: #FFFFFF !important;
+                -webkit-text-fill-color: #FFFFFF !important;
+                background: none !important;
+                -webkit-background-clip: initial !important;
+                background-clip: initial !important;
+                font-size: 2rem;
+                font-weight: 800;
+                letter-spacing: 0.5px;
+                display: inline-block;
+                /* Subtle shadow only for contrast */
+                text-shadow: 0 1px 2px rgba(0,0,0,0.85);
+              ">Welcome to Stock Price Prediction with Machine Learning.</span>
             </h2>
             <div class="row">
               <div class="col-12 col-sm-6 text-center text-sm-start"></div>
@@ -222,13 +272,13 @@
                 <tbody>
                   {% if recent_stocks %} {% for i in recent_stocks %}
                   <tr>
-                    <td>{{i.Ticker}}</td>
-                    <td>{{i.Open}}</td>
-                    <td>{{i.High}}</td>
-                    <td>{{i.Low}}</td>
-                    <td>{{i.Close}}</td>
-                    <td>{{i.Adj_Close}}</td>
-                    <td>{{i.Volume}}</td>
+                    <td><a href="/predict/{{i.Ticker}}/30/" style="color: #60A5FA; font-weight: bold; text-decoration: none;">{{i.Ticker}}</a></td>
+                    <td>{{i.Open|floatformat:2}}</td>
+                    <td>{{i.High|floatformat:2}}</td>
+                    <td>{{i.Low|floatformat:2}}</td>
+                    <td>{{i.Close|floatformat:2}}</td>
+                    <td>{{i.Adj_Close|floatformat:2}}</td>
+                    <td>{{i.Volume|floatformat:0}}</td>
                   </tr>
                   {% endfor %} {% endif %}
                 </tbody>
@@ -237,9 +287,6 @@
           </div>
         </div>
         <!-- Recent Sales End -->
-
-
-
 
         <!-- Button 1 -->
 <div class="container-fluid pt-4 px-4">
@@ -252,7 +299,6 @@
   </div>
 </div>
 
-        
 <!-- Button 2-->
 <div class="container-fluid pt-4 px-4">
   <div class="bg-secondary rounded-top p-4">
@@ -269,9 +315,7 @@
           <div class="bg-secondary rounded-top p-4">
             <div class="row">
               <div class="col-12 col-sm-6 text-center text-sm-start">
-                <a href="https://www.linkedin.com/in/vishal-lazrus-7924091b7/"
-                  >Vishal Lazrus    </br>      (This project assign by KUKBIT SL.)</a
-                >
+                <span class="text-muted small">Stock Dashboard</span>
               </div>
             </div>
           </div>
@@ -295,12 +339,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
-    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
-    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
 
     <style>
       @keyframes running-text {
@@ -360,5 +398,24 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    
+    <!-- Ensure Plotly charts render properly -->
+    <script>
+      // Wait for DOM to be ready and Plotly to be loaded
+      window.addEventListener('DOMContentLoaded', function() {
+        if (typeof Plotly !== 'undefined') {
+          console.log('Plotly loaded successfully');
+          // Force resize all Plotly charts to ensure they display
+          var plots = document.querySelectorAll('.plotly-graph-div');
+          plots.forEach(function(plot) {
+            if (plot.data) {
+              Plotly.Plots.resize(plot);
+            }
+          });
+        } else {
+          console.error('Plotly not loaded!');
+        }
+      });
+    </script>
   </body>
 </html>

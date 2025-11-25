@@ -33,30 +33,34 @@
     });
 
 
-    // Progress Bar
-    $('.pg-bar').waypoint(function () {
+    // Progress Bar - using simpler approach without waypoint
+    if ($('.pg-bar').length > 0) {
         $('.progress .progress-bar').each(function () {
             $(this).css("width", $(this).attr("aria-valuenow") + '%');
         });
-    }, {offset: '80%'});
+    }
 
 
-    // Calender
-    $('#calender').datetimepicker({
-        inline: true,
-        format: 'L'
-    });
+    // Calender - only if element exists
+    if ($('#calender').length > 0 && typeof $('#calender').datetimepicker === 'function') {
+        $('#calender').datetimepicker({
+            inline: true,
+            format: 'L'
+        });
+    }
 
 
-    // Testimonials carousel
-    $(".testimonial-carousel").owlCarousel({
-        autoplay: true,
-        smartSpeed: 1000,
-        items: 1,
-        dots: true,
-        loop: true,
-        nav : false
-    });
+    // Testimonials carousel - only if element exists
+    if ($(".testimonial-carousel").length > 0 && typeof $(".testimonial-carousel").owlCarousel === 'function') {
+        $(".testimonial-carousel").owlCarousel({
+            autoplay: true,
+            smartSpeed: 1000,
+            items: 1,
+            dots: true,
+            loop: true,
+            nav : false
+        });
+    }
 
 
     // Chart Global Color

@@ -1,9 +1,14 @@
 /********** Template CSS **********/
 :root {
-    --primary: #EB1616;
-    --secondary: #191C24;
-    --light: #6C7293;
-    --dark: #000000;
+    --primary: #3B82F6;
+    --secondary: #1E3A8A;
+    --light: #DBEAFE;
+    --dark: #1E293B;
+    --accent: #8B5CF6;
+    --success: #10B981;
+    --info: #60A5FA;
+    --warning: #FBBF24;
+    --danger: #EF4444;
 }
 
 .back-to-top {
@@ -71,15 +76,16 @@
     width: 250px;
     height: 100vh;
     overflow-y: auto;
-    background: var(--secondary);
+    background: linear-gradient(180deg, #1E3A8A 0%, #312E81 100%);
     transition: 0.5s;
     z-index: 999;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .content {
     margin-left: 250px;
     min-height: 100vh;
-    background: var(--dark);
+    background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
     transition: 0.5s;
 }
 
@@ -120,19 +126,23 @@
 
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
-    padding: 7px 20px;
-    color: var(--light);
-    font-weight: 500;
-    border-left: 3px solid var(--secondary);
+    padding: 12px 20px;
+    color: #DBEAFE;
+    font-weight: 600;
+    border-left: 3px solid transparent;
     border-radius: 0 30px 30px 0;
     outline: none;
+    transition: all 0.3s ease;
+    margin: 4px 0;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
-    background: var(--dark);
-    border-color: var(--primary);
+    color: #FFFFFF;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+    border-color: #3B82F6;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {
@@ -141,13 +151,18 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--dark);
-    border-radius: 40px;
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    color: #60A5FA;
+    transition: all 0.3s ease;
 }
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: var(--secondary);
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    color: white;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
 }
 
 .sidebar .navbar .dropdown-toggle::after {
@@ -168,24 +183,29 @@
 .sidebar .navbar .dropdown-item {
     padding-left: 25px;
     border-radius: 0 30px 30px 0;
-    color: var(--light);
+    color: #DBEAFE;
+    transition: all 0.3s ease;
 }
 
 .sidebar .navbar .dropdown-item:hover,
 .sidebar .navbar .dropdown-item.active {
-    background: var(--dark);
+    background: rgba(59, 130, 246, 0.2);
+    color: #FFFFFF;
 }
 
 .content .navbar .navbar-nav .nav-link {
     margin-left: 25px;
     padding: 12px 0;
-    color: var(--light);
+    color: #DBEAFE;
     outline: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .content .navbar .navbar-nav .nav-link:hover,
 .content .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
+    color: #6366F1;
+    transform: scale(1.05);
 }
 
 .content .navbar .sidebar-toggler,
@@ -195,17 +215,30 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--dark);
-    border-radius: 40px;
+    background: rgba(99, 102, 241, 0.15);
+    border-radius: 12px;
+    color: #6366F1;
+    transition: all 0.3s ease;
+}
+
+.content .navbar .sidebar-toggler:hover,
+.content .navbar .navbar-nav .nav-link i:hover {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    color: white;
+    transform: rotate(90deg);
 }
 
 .content .navbar .dropdown-item {
-    color: var(--light);
+    color: #F1F5F9;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
 }
 
 .content .navbar .dropdown-item:hover,
 .content .navbar .dropdown-item.active {
-    background: var(--dark);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    color: #FFFFFF;
+    transform: translateX(5px);
 }
 
 .content .navbar .dropdown-toggle::after {

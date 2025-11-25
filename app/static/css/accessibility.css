@@ -1,0 +1,642 @@
+/* Modern Vibrant Theme - v2.4 OHLC + Hover Tooltip Fix */
+:root {
+    --primary: #3B82F6;
+    --secondary: #8B5CF6;
+    --success: #10B981;
+    --danger: #EF4444;
+    --warning: #FBBF24;
+    --info: #60A5FA;
+    --dark: #0F172A;
+    --light: #F8FAFC;
+}
+
+body, html {
+    background: linear-gradient(135deg, #1E293B 0%, #0F172A 50%, #1E293B 100%) !important;
+    color: #F8FAFC !important;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    min-height: 100vh;
+}
+
+/* Links */
+a {
+    color: #60A5FA !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+a:hover {
+    color: #93C5FD !important;
+    text-decoration: underline;
+    transform: translateX(2px);
+}
+
+/* Cards */
+.card, .bg-secondary {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border: 1px solid rgba(99, 102, 241, 0.2) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366F1, #8B5CF6, #EC4899);
+}
+
+/* Modern Tables */
+.table {
+    background: rgba(30, 41, 59, 0.6) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.table thead tr {
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6) !important;
+}
+
+.table thead th {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    border: none !important;
+    padding: 1.2rem !important;
+}
+
+.table tbody tr:nth-child(even) {
+    background: rgba(99, 102, 241, 0.08) !important;
+}
+
+.table tbody tr:nth-child(odd) {
+    background: rgba(30, 41, 59, 0.5) !important;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: rgba(99, 102, 241, 0.25) !important;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.table td, .table th {
+    color: #F8FAFC !important;
+    border-color: rgba(59, 130, 246, 0.2) !important;
+    padding: 1rem !important;
+    font-size: 0.95rem;
+}
+
+/* Specific styling for information tables */
+.table-bordered td:first-child {
+    font-weight: 600 !important;
+    color: #93C5FD !important;
+    background: rgba(59, 130, 246, 0.15) !important;
+}
+
+.table-bordered td:last-child {
+    color: #F8FAFC !important;
+    font-weight: 500 !important;
+}
+
+/* Navigation */
+.navbar-dark .navbar-nav .nav-link {
+    color: #CBD5E1 !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #6366F1 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+
+/* Sidebar */
+.sidebar {
+    background: rgba(15, 23, 42, 0.95) !important;
+    border-right: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.sidebar .navbar-brand h3 {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800 !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #4F46E5, #7C3AED) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #EF4444, #DC2626) !important;
+    border: none !important;
+}
+
+/* Loading spinner */
+.spinner-border.text-primary {
+    color: #6366F1 !important;
+}
+
+/* Headings */
+h1, h2, h3 {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800 !important;
+}
+
+/* Force the moving welcome banner to pure white text without gradient */
+#running-text {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Plotly modebar: bright white icons on dark background */
+.modebar-container, .plotly .modebar {
+    background: rgba(10, 14, 26, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 6px !important;
+    padding: 5px !important;
+}
+
+.plotly .modebar-group {
+    margin: 0 2px !important;
+}
+
+.plotly .modebar-btn {
+    background: transparent !important;
+    border-radius: 4px !important;
+    margin: 0 2px !important;
+    padding: 5px !important;
+    transition: all 0.15s ease !important;
+}
+
+.plotly .modebar-btn svg {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.plotly .modebar-btn path {
+    fill: #FFFFFF !important; /* Pure white - maximum visibility */
+    stroke: none !important;
+    opacity: 0.9 !important;
+}
+
+.plotly .modebar-btn:hover {
+    background: rgba(59, 130, 246, 0.3) !important;
+}
+
+.plotly .modebar-btn:hover path {
+    fill: #FFFFFF !important;
+    opacity: 1 !important;
+}
+
+.plotly .modebar-btn.active {
+    background: rgba(59, 130, 246, 0.5) !important;
+}
+
+.plotly .modebar-btn.active path {
+    fill: #FFFFFF !important;
+    opacity: 1 !important;
+}
+
+h4, h5, h6 {
+    color: #F1F5F9 !important;
+    font-weight: 700 !important;
+}
+
+/* Plot styling */
+.plotly-graph-div {
+    background: transparent !important;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+/* Form controls */
+.form-control {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border: 2px solid rgba(99, 102, 241, 0.3) !important;
+    color: #F1F5F9 !important;
+    border-radius: 10px;
+    padding: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(30, 41, 59, 1) !important;
+    border-color: #6366F1 !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2) !important;
+    color: #ffffff !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0F172A;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #4F46E5, #7C3AED);
+}
+
+/* Alerts and badges */
+.alert {
+    border-radius: 12px;
+    border: none;
+    font-weight: 500;
+}
+
+.badge {
+    font-weight: 600;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+}
+
+/* Footer */
+footer, .footer {
+    background: rgba(15, 23, 42, 0.8);
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+footer a, .footer a {
+    color: #6366F1 !important;
+}
+
+footer a:hover, .footer a:hover {
+    color: #818CF8 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card, .table {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Glow effects */
+.card:hover {
+    box-shadow: 0 12px 48px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Text selection */
+::selection {
+    background: rgba(99, 102, 241, 0.4);
+    color: white;
+}
+
+/* Enhanced text visibility */
+p, span, div, td, th, li {
+    color: #F1F5F9 !important;
+}
+
+/* Ensure chart containers don't have yellow/cream backgrounds */
+.bg-secondary .plotly-graph-div,
+.bg-secondary div[id*="plotly"] {
+    background: transparent !important;
+}
+
+/* Force all plotly backgrounds transparent */
+.js-plotly-plot .plotly,
+.js-plotly-plot .plotly .main-svg {
+    background: transparent !important;
+}
+
+.plotly .bg {
+    fill: transparent !important;
+}
+
+label {
+    color: #F8FAFC !important;
+    font-weight: 600;
+}
+
+/* Ensure all text is bright and readable */
+.text-start, .text-center, .text-end {
+    color: #F8FAFC !important;
+}
+
+/* Welcome text and headings */
+.text-white, .text-light {
+    color: #F1F5F9 !important;
+}
+
+/* Card titles */
+.card-title {
+    color: #FFFFFF !important;
+    font-weight: 700;
+}
+
+/* Status badges */
+.badge-primary {
+    background: linear-gradient(135deg, #6366F1, #8B5CF6) !important;
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #10B981, #059669) !important;
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #EF4444, #DC2626) !important;
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #F59E0B, #D97706) !important;
+}
+
+/* Improve plotly chart text */
+.plotly text {
+    fill: #FFFFFF !important;
+}
+
+.plotly .xtick text, .plotly .ytick text {
+    fill: #FFFFFF !important;
+}
+
+.plotly .gtitle, .plotly .xtitle, .plotly .ytitle {
+    fill: #FFFFFF !important;
+}
+
+/* Stock ticker display */
+.ticker-symbol {
+    color: #6366F1 !important;
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+/* Price positive/negative */
+.price-up {
+    color: #10B981 !important;
+}
+
+.price-down {
+    color: #EF4444 !important;
+}
+
+/* Loading states */
+.loading-text {
+    color: #6366F1 !important;
+    font-weight: 600;
+}
+
+/* Error messages */
+.error-message, .alert-danger {
+    background: rgba(239, 68, 68, 0.15) !important;
+    border: 2px solid #EF4444 !important;
+    color: #FEE2E2 !important;
+}
+
+/* Success messages */
+.success-message, .alert-success {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 2px solid #10B981 !important;
+    color: #D1FAE5 !important;
+}
+
+/* Info messages */
+.info-message, .alert-info {
+    background: rgba(59, 130, 246, 0.15) !important;
+    border: 2px solid #3B82F6 !important;
+    color: #DBEAFE !important;
+}
+
+/* Plotly Chart Container Styling */
+.plotly-graph-div {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 500px !important;
+    position: relative !important;
+}
+
+.plotly-graph-div .main-svg {
+    overflow: visible !important;
+}
+
+/* Ensure chart divs are visible */
+div[id*="plotly"] {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Make sure candlestick and all chart elements are visible */
+.candlestick, .scatterlayer, .trace, .lines, .point {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure candlestick paths are visible */
+.candlestick path, .ohlc path {
+    opacity: 1 !important;
+    stroke-opacity: 1 !important;
+    fill-opacity: 0.8 !important;
+}
+
+/* Make trace layers visible */
+.cartesianlayer, .plot {
+    opacity: 1 !important;
+}
+
+/* Ensure plotly elements don't get hidden */
+.plotly .main-svg, .plotly .subplot {
+    overflow: visible !important;
+}
+
+/* Fix any z-index issues */
+.js-plotly-plot {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Force hover tooltips to be visible with dark background and white text */
+.hoverlayer .hovertext {
+    background-color: #1E293B !important;
+    border: 2px solid #60A5FA !important;
+    color: #FFFFFF !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+
+.hoverlayer .hovertext path {
+    fill: #1E293B !important;
+    stroke: #60A5FA !important;
+}
+
+.hoverlayer .hovertext text {
+    fill: #FFFFFF !important;
+}
+
+/* Plotly modebar styling - v2.5 Enhanced Icon Visibility */
+.modebar {
+    background: rgba(15, 23, 42, 0.98) !important;
+    border: 2px solid rgba(96, 165, 250, 0.8) !important;
+    border-radius: 8px !important;
+    padding: 6px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;
+}
+
+.modebar-group {
+    background: transparent !important;
+}
+
+.modebar-btn {
+    background: rgba(30, 41, 59, 0.5) !important;
+    filter: brightness(0) invert(1) drop-shadow(0 0 2px white) !important;
+    opacity: 1 !important;
+    transition: all 0.2s ease !important;
+    border-radius: 4px !important;
+}
+
+.modebar-btn:hover {
+    background: rgba(96, 165, 250, 0.6) !important;
+    opacity: 1 !important;
+    transform: scale(1.15) !important;
+    box-shadow: 0 0 8px rgba(96, 165, 250, 0.8) !important;
+}
+
+.modebar-btn.active {
+    background: rgba(99, 102, 241, 0.5) !important;
+    opacity: 1 !important;
+}
+
+/* Modebar icon paths */
+.modebar-btn path {
+    fill: #FFFFFF !important;
+}
+
+.modebar-btn svg {
+    filter: brightness(1.2) !important;
+}
+
+/* Ensure modebar tooltips are visible */
+.modebar-btn .name {
+    display: none;
+}
+
+.modebar-btn[data-title]:hover::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1E293B !important;
+    color: #FFFFFF !important;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    border: 1px solid #60A5FA;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+}
+
+/* Plotly background transparency fix */
+.js-plotly-plot .plotly .main-svg {
+    background: transparent !important;
+}
+
+/* Chart container improvements */
+.bg-secondary .plotly-graph-div {
+    border-radius: 8px;
+    overflow: visible;
+}
+
+/* Ensure chart axes labels are bright and visible */
+.plotly .xtitle, .plotly .ytitle {
+    fill: #FFFFFF !important;
+    font-weight: 700 !important;
+}
+
+.plotly .xaxislayer-above text, .plotly .yaxislayer-above text {
+    fill: #FFFFFF !important;
+}
+
+.plotly .xaxislayer text, .plotly .yaxislayer text {
+    fill: #FFFFFF !important;
+}
+
+/* Grid lines subtle but visible */
+.plotly .gridlayer .x, .plotly .gridlayer .y {
+    stroke: rgba(148, 163, 184, 0.2) !important;
+}
+
+/* Legend styling */
+.plotly .legend {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border: 1px solid rgba(99, 102, 241, 0.3) !important;
+    border-radius: 8px !important;
+}
+
+.plotly .legend text {
+    fill: #FFFFFF !important;
+    font-weight: 600 !important;
+}
+
+/* Rangeslider styling */
+.plotly .rangeslider-mask-min, .plotly .rangeslider-mask-max {
+    fill: rgba(15, 23, 42, 0.6) !important;
+}
+
+.plotly .rangeslider-slidebox {
+    fill: rgba(99, 102, 241, 0.3) !important;
+    stroke: #6366F1 !important;
+}
+
+/* Ensure responsive charts */
+@media (max-width: 768px) {
+    .plotly-graph-div {
+        min-height: 300px !important;
+    }
+    
+    .modebar {
+        transform: scale(0.9);
+    }
+}
